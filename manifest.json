@@ -1,0 +1,12 @@
+{
+  "name": "Dragonbane Initiative",
+  "version": "1.0.0",
+  "manifest_version": 1,
+  "action": {
+    "title": "Dragonbane Initiative",
+    "icon": "/apps/obr-dragonbane-initiative/cards.svg",
+    "popover": "/apps/obr-dragonbane-initiative/",
+    "height": 600,
+    "width": 400
+  }
+}
