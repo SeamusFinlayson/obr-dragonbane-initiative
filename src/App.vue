@@ -38,7 +38,7 @@ OBR.onReady(() => {
   </div>
 
   <button class="row full-width mt-md" @click="drawCards">
-    Draw Initiative
+    DRAW INITIATIVE
   </button>
 </template>
 

@@ -48,7 +48,7 @@ const editDone = () => {
         ><input class="col" type="checkbox" v-model="k" />
       </div>
 
-      <button class="row full-width" @click="editDone">Done</button>
+      <button class="row full-width" @click="editDone">DONE</button>
     </div>
   </dialog>
 </template>
@@ -68,14 +68,6 @@ const editDone = () => {
 
 .keep {
   background-color: rgb(118, 118, 118);
-}
-
-dialog {
-  border: 1px solid rgba(187, 153, 255, 0.3);
-  border-radius: 10px;
-  background-color: #2d3143;
-  max-width: 50%;
-  box-shadow: 0px 0px 1px 2px rgba(70, 50, 110, 0.5);
 }
 
 input {
