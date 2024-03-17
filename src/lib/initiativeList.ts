@@ -3,6 +3,7 @@ import { IDs, IInitCard, IInitListItem } from "../components/models";
 import { ref } from "vue";
 
 export const initiativeItems = ref(<IInitListItem[]>[]);
+export const maxCards = ref(10)
 
 export const setupInitiativeList = () => {
   const renderList = (items: Item[]) => {
@@ -28,7 +29,8 @@ export const setupInitiativeList = () => {
 };
 
 export const drawCards = async () => {
-  const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const cards: number[] = []
+  for (let i = 1; i <= maxCards.value; i++) cards.push(i)
   await OBR.scene.items.updateItems(
     (item): item is Item => (item.metadata[IDs.Meta] ? true : false),
     (items) => {
@@ -87,7 +89,7 @@ export const setFerocity = async (id: string) => {
   );
 };
 
-export const markDone = async (id: string, index: number) => {
+export const markDone = async (id: string, index: number) =>
   await OBR.scene.items.updateItems(
     (item): item is Item => item.id === id,
     (items) => {
@@ -97,13 +99,8 @@ export const markDone = async (id: string, index: number) => {
       }
     }
   );
-};
 
-export const setKeepCard = async (
-  id: string,
-  index: number,
-  value: boolean
-) => {
+export const setKeepCard = async (id: string, index: number, value: boolean) =>
   await OBR.scene.items.updateItems(
     (item): item is Item => item.id === id,
     (items) => {
@@ -113,13 +110,8 @@ export const setKeepCard = async (
       }
     }
   );
-};
 
-export const setCardNumber = async (
-  id: string,
-  index: number,
-  value: number
-) => {
+export const setCardNumber = async (id: string, index: number, value: number) =>
   await OBR.scene.items.updateItems(
     (item): item is Item => item.id === id,
     (items) => {
@@ -129,4 +121,3 @@ export const setCardNumber = async (
       }
     }
   );
-};

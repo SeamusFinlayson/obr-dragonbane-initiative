@@ -1,14 +1,20 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import OBR from "@owlbear-rodeo/sdk";
 import { setupContextMenu } from "./lib/contextMenu";
 import {
   initiativeItems,
   setupInitiativeList,
+  maxCards,
   drawCards,
   setFerocity,
 } from "./lib/initiativeList";
 
 import InitCard from "./components/InitCard.vue";
+import SvgIcon from "./components/SvgIcon.vue";
+import { mdiCog } from "@mdi/js";
+
+const configDialog = ref<HTMLDialogElement | null>(null);
 
 OBR.onReady(() => {
   setupContextMenu();
@@ -17,7 +23,14 @@ OBR.onReady(() => {
 </script>
 
 <template>
-  <h2>Initiative</h2>
+  <div class="row items-center justify-between">
+    <h2>Initiative</h2>
+  </div>
+
+  <div class="row items-center mb-sm">
+    <strong class="mr-sm"> Max. Cards: {{ maxCards }}</strong>
+    <SvgIcon class="cog-btn" :path="mdiCog" @click="configDialog?.showModal()" />
+  </div>
 
   <div
     class="mb-sm init-row"
@@ -37,14 +50,27 @@ OBR.onReady(() => {
     </div>
   </div>
 
-  <button class="row init-btn mt-md" @click="drawCards">
-    DRAW INITIATIVE
-  </button>
+  <button class="row init-btn mt-md" @click="drawCards">DRAW INITIATIVE</button>
+
+  <dialog ref="configDialog">
+    <div class="card items-center justify-center">
+      <div class="row mb-md"><strong>Set Max. Cards</strong></div>
+      <input
+        class="row full-width mb-md"
+        type="number"
+        v-model.number="maxCards"
+      />
+      <button class="row full-width" @click="configDialog?.close()">
+        DONE
+      </button>
+    </div>
+  </dialog>
 </template>
 
 <style scoped>
 .init-card,
-.init-title {
+.init-title,
+.cog-btn {
   cursor: pointer;
 }
 
@@ -58,5 +84,10 @@ OBR.onReady(() => {
   background-color: inherit;
   border: 1px solid #bb99ff;
   box-shadow: 1px 1px 1px 1px rgb(35, 35, 35);
+}
+
+input {
+  text-align: center;
+  font-size: larger;
 }
 </style>
