@@ -1,5 +1,9 @@
 export const ID = "uk.nboughton.obr-db-initiative"
 
+export enum Site {
+  Path = "/apps/obr-dragonbane-initiative"
+}
+
 export enum IDs {
   Root = ID,
   Meta = `${ID}/metadata`

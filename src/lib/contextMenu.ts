@@ -1,12 +1,12 @@
 import OBR from "@owlbear-rodeo/sdk";
-import { IDs, IInitCard } from "../components/models";
+import { IDs, IInitCard, Site } from "../components/models";
 
 export const setupContextMenu = () => {
   OBR.contextMenu.create({
     id: `${IDs.Root}/context-menu`,
     icons: [
       {
-        icon: "/add.svg",
+        icon: `${Site.Path}/add.svg`,
         label: "Add to Initiative",
         filter: {
           every: [
@@ -17,7 +17,7 @@ export const setupContextMenu = () => {
       },
 
       {
-        icon: "/remove.svg",
+        icon: `${Site.Path}/remove.svg`,
         label: "Remove from Initiative",
         filter: {
           every: [{ key: "layer", value: "CHARACTER" }],
