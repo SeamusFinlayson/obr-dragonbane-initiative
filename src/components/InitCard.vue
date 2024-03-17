@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { IInitCard } from "./models";
-import { setCardNumber, setKeepCard } from "../lib/initiativeList";
+import { maxCards, setCardNumber, setKeepCard } from "../lib/initiativeList";
 
 const props = defineProps<{
   card: IInitCard;
@@ -40,7 +40,7 @@ const editDone = () => {
         type="number"
         v-model.number="n"
         :min="0"
-        :max="10"
+        :max="maxCards"
       />
 
       <div class="row mb-md full-width items-center">
