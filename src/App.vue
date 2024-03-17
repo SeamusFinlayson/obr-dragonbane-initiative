@@ -5,12 +5,9 @@ import {
   initiativeItems,
   setupInitiativeList,
   drawCards,
-  markDone,
   setFerocity,
-  toggleKeepCard,
 } from "./lib/initiativeList";
-import { pin } from "./lib/icons";
-import SvgIcon from "./components/SvgIcon.vue";
+
 import InitCard from "./components/InitCard.vue";
 
 OBR.onReady(() => {
@@ -32,20 +29,16 @@ OBR.onReady(() => {
         {{ item.name }}
       </div>
 
-      <div class="col">
-        <div class="row">
-          <div
-            class="col mr-sm init-card items-center"
-            v-for="(card, j) in item.initiative"
-            :key="`card-${j}`"
-          >
-            <InitCard :card="card.card" @click="markDone(item.id, j)" />
-            <SvgIcon
-              :path="pin(card.keep)"
-              @click="toggleKeepCard(item.id, j)"
-            />
-          </div>
-        </div>
+      <div
+        class="col mr-sm init-card items-center justify-center"
+        v-for="(card, j) in item.initiative"
+        :key="`card-${j}`"
+      >
+        <InitCard
+          :card="card"
+          :id="item.id"
+          :index="j"
+        />
       </div>
     </div>
 

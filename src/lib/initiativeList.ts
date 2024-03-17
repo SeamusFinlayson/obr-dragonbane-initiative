@@ -38,7 +38,7 @@ export const drawCards = async () => {
           }
         })
       }
-      
+
       // Draw the cards
       for (let item of items) {
         const meta = item.metadata[IDs.Meta] as IInitListItem;
@@ -95,14 +95,26 @@ export const markDone = async (id: string, index: number) => {
   );
 };
 
-export const toggleKeepCard = async (id: string, index: number) => {
+export const setKeepCard = async (id: string, index: number, value: boolean) => {
   await OBR.scene.items.updateItems(
     (item): item is Item => item.id === id,
     (items) => {
       for (let item of items) {
         const meta = item.metadata[IDs.Meta] as IInitListItem;
-        meta.initiative[index].keep = !meta.initiative[index].keep;
+        meta.initiative[index].keep = value;
       }
     }
   );
 };
+
+export const setCardNumber = async (id:string, index: number, value: number) => {
+  await OBR.scene.items.updateItems(
+    (item): item is Item => item.id === id,
+    (items) => {
+      for (let item of items) {
+        const meta = item.metadata[IDs.Meta] as IInitListItem;
+        meta.initiative[index].card = value;
+      }
+    }
+  );
+}
