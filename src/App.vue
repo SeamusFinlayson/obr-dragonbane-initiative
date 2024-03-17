@@ -20,7 +20,7 @@ OBR.onReady(() => {
   <h2>Initiative</h2>
 
   <div
-    class="row justify-between items-center mb-sm init-row"
+    class="mb-sm init-row"
     v-for="(item, i) in initiativeItems"
     :key="`init-item-${i}`"
   >
@@ -29,7 +29,7 @@ OBR.onReady(() => {
     </div>
 
     <div
-      class="col mr-sm init-card items-center justify-center"
+      class="col mr-sm init-card items-center justify-end"
       v-for="(card, j) in item.initiative"
       :key="`card-${j}`"
     >
@@ -37,7 +37,7 @@ OBR.onReady(() => {
     </div>
   </div>
 
-  <button class="row full-width mt-md" @click="drawCards">
+  <button class="row init-btn mt-md" @click="drawCards">
     DRAW INITIATIVE
   </button>
 </template>
@@ -49,6 +49,10 @@ OBR.onReady(() => {
 }
 
 .init-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
   padding: 1em;
   border-radius: 20px;
   background-color: inherit;

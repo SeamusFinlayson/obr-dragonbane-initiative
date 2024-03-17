@@ -1,5 +1,5 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Roboto, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -24,17 +24,19 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: start;
-  flex-direction: column;
-  justify-items: start;
-  min-width: 320px;
-  min-height: 100vh;
+  padding: 0;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: fit-content;
+  min-height: 100%;
+  margin-left: 2em;
+  margin-right: 2em;
+  padding: 2rem;
+  text-align: center;
 }
 
 dialog {
@@ -45,13 +47,38 @@ dialog {
   box-shadow: 0px 0px 1px 2px rgba(70, 50, 110, 0.5);
 }
 
-.row {
+button {
   display: flex;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+  border-radius: 20px;
+  border: 1px solid #bb99ff;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  color: #bb99ff;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  background-color: inherit;
+  width: 100%;
+}
+button:hover {
+  background-color: rgba(187, 153, 255, 0.1);
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.row {
+  display: inline-flex;
   flex-direction: row;
 }
 
 .col {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
 }
 
@@ -99,39 +126,10 @@ dialog {
   width: 100%;
 }
 
-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 20px;
-  border: 1px solid #bb99ff;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  /*background-color: #1a1a1a;*/
-  color: #bb99ff;
-  cursor: pointer;
-  transition: border-color 0.25s;
-  background-color: inherit;
-}
-button:hover {
-  background-color: rgba(187, 153, 255, 0.1);
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+
 
 .card {
   padding: 1em;
-}
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
 }
 
 svg {

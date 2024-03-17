@@ -18,6 +18,10 @@ export const setupInitiativeList = () => {
         });
       }
     }
+
+    initiativeItems.value.sort(
+      (a, b) => a.initiative[0].card - b.initiative[0].card
+    );
   };
 
   OBR.scene.items.onChange(renderList);
@@ -31,12 +35,12 @@ export const drawCards = async () => {
       // Splice out any kept cards
       for (let item of items) {
         const meta = item.metadata[IDs.Meta] as IInitListItem;
-        meta.initiative.forEach(c => {
+        meta.initiative.forEach((c) => {
           if (c.keep) {
-            const i = cards.findIndex(n => n === c.card)
-            if (i > -1) cards.splice(i, 1)
+            const i = cards.findIndex((n) => n === c.card);
+            if (i > -1) cards.splice(i, 1);
           }
-        })
+        });
       }
 
       // Draw the cards
@@ -95,7 +99,11 @@ export const markDone = async (id: string, index: number) => {
   );
 };
 
-export const setKeepCard = async (id: string, index: number, value: boolean) => {
+export const setKeepCard = async (
+  id: string,
+  index: number,
+  value: boolean
+) => {
   await OBR.scene.items.updateItems(
     (item): item is Item => item.id === id,
     (items) => {
@@ -107,7 +115,11 @@ export const setKeepCard = async (id: string, index: number, value: boolean) => 
   );
 };
 
-export const setCardNumber = async (id:string, index: number, value: number) => {
+export const setCardNumber = async (
+  id: string,
+  index: number,
+  value: number
+) => {
   await OBR.scene.items.updateItems(
     (item): item is Item => item.id === id,
     (items) => {
@@ -117,4 +129,4 @@ export const setCardNumber = async (id:string, index: number, value: number) => 
       }
     }
   );
-}
+};
