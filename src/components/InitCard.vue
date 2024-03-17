@@ -9,15 +9,17 @@ const props = defineProps<{
   index: number;
 }>();
 
-const n = ref(props.card.card);
-const k = ref(props.card.keep);
+const n = ref(0); // Card number
+const k = ref(false); // Keep card
+const d = ref(false); // Mark turn done
 const editCard = ref<HTMLDialogElement | null>(null);
 
 const editOpen = () => {
-  n.value = props.card.card
-  k.value = props.card.keep
-  editCard.value?.showModal()
-}
+  n.value = props.card.card;
+  k.value = props.card.keep;
+  d.value = false;
+  editCard.value?.showModal();
+};
 
 const editDone = () => {
   if (n.value != props.card.card) setCardNumber(props.id, props.index, n.value);
@@ -27,27 +29,26 @@ const editDone = () => {
 </script>
 
 <template>
-  <div
-    :class="`init-card ${card.keep ? 'keep' : ''}`"
-    @click="editOpen"
-  >
+  <div :class="`init-card ${card.keep ? 'keep' : ''}`" @click="editOpen">
     {{ card.card === 0 ? "" : card.card }}
   </div>
 
   <dialog ref="editCard">
-    <h4 class="row">Edit Card</h4>
+    <div class="card items-center justify-center">
+      <input
+        class="row full-width mb-md"
+        type="number"
+        v-model.number="n"
+        :min="0"
+        :max="10"
+      />
 
-    <div class="row mb-sm">
-      <input class="col" type="number" v-model.number="n" :min="0" :max="10" />
-    </div>
+      <div class="row mb-md full-width items-center">
+        <span class="col mr-sm">Keep Card</span
+        ><input class="col" type="checkbox" v-model="k" />
+      </div>
 
-    <div class="row mb-sm">
-      <span class="col">Keep Card</span
-      ><input class="col" type="checkbox" v-model="k" />
-    </div>
-
-    <div class="row justify-end">
-      <button class="col" @click="editDone">Done</button>
+      <button class="row full-width" @click="editDone">Done</button>
     </div>
   </dialog>
 </template>
@@ -70,8 +71,15 @@ const editDone = () => {
 }
 
 dialog {
-  border: 1px solid grey;
+  border: 1px solid rgba(187, 153, 255, 0.3);
   border-radius: 10px;
-  background-color: rgb(58, 58, 58);
+  background-color: #2d3143;
+  max-width: 50%;
+  box-shadow: 0px 0px 1px 2px rgba(70, 50, 110, 0.5);
+}
+
+input {
+  text-align: center;
+  font-size: larger;
 }
 </style>

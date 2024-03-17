@@ -17,33 +17,29 @@ OBR.onReady(() => {
 </script>
 
 <template>
-  <div class="col justify-evenly">
-    <h2>Initiative</h2>
+  <h2>Initiative</h2>
 
-    <div
-      class="row justify-between items-center mb-sm init-row"
-      v-for="(item, i) in initiativeItems"
-      :key="`init-item-${i}`"
-    >
-      <div class="col mr-sm init-title" @click="setFerocity(item.id)">
-        {{ item.name }}
-      </div>
-
-      <div
-        class="col mr-sm init-card items-center justify-center"
-        v-for="(card, j) in item.initiative"
-        :key="`card-${j}`"
-      >
-        <InitCard
-          :card="card"
-          :id="item.id"
-          :index="j"
-        />
-      </div>
+  <div
+    class="row justify-between items-center mb-sm init-row"
+    v-for="(item, i) in initiativeItems"
+    :key="`init-item-${i}`"
+  >
+    <div class="col mr-md init-title" @click="setFerocity(item.id)">
+      {{ item.name }}
     </div>
 
-    <button class="draw-btn" @click="drawCards">Draw Initiative</button>
+    <div
+      class="col mr-sm init-card items-center justify-center"
+      v-for="(card, j) in item.initiative"
+      :key="`card-${j}`"
+    >
+      <InitCard :card="card" :id="item.id" :index="j" />
+    </div>
   </div>
+
+  <button class="row full-width mt-md" @click="drawCards">
+    Draw Initiative
+  </button>
 </template>
 
 <style scoped>
@@ -54,8 +50,9 @@ OBR.onReady(() => {
 
 .init-row {
   padding: 1em;
-  border-radius: 10px;
-  background-color: rgb(58, 58, 58);
+  border-radius: 20px;
+  background-color: inherit;
+  border: 1px solid #bb99ff;
   box-shadow: 1px 1px 1px 1px rgb(35, 35, 35);
 }
 </style>

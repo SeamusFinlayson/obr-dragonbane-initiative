@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #2d3143;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -27,7 +27,8 @@ body {
   display: flex;
   place-items: start;
   flex-direction: column;
-  min-width: 320px;
+  justify-items: start;
+  width: 100%;
   min-height: 100vh;
 }
 
@@ -70,23 +71,44 @@ h1 {
   margin-right: 0.5em;
 }
 
+.mr-md {
+  margin-right: 1em;
+}
+
+.mt-md {
+  margin-top: 1em;
+}
+
 .mb-sm {
   margin-bottom: 0.5em;
 }
 
+.mb-md {
+  margin-bottom: 1em;
+}
+
+.full-width {
+  width: 100%;
+}
+
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  border: 1px solid #bb99ff;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  /*background-color: #1a1a1a;*/
+  color: #bb99ff;
   cursor: pointer;
   transition: border-color 0.25s;
+  background-color: inherit;
 }
 button:hover {
-  border-color: #646cff;
+  background-color: rgba(187, 153, 255, 0.1);
 }
 button:focus,
 button:focus-visible {
@@ -94,7 +116,7 @@ button:focus-visible {
 }
 
 .card {
-  padding: 2em;
+  padding: 1em;
 }
 
 #app {
