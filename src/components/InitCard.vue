@@ -52,26 +52,3 @@ const editDone = () => {
     </div>
   </dialog>
 </template>
-
-<style scoped>
-.init-card {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  background-color: white;
-  color: black;
-  border-radius: 5px;
-  font-weight: bold;
-  height: 1.5em;
-  width: 1.5em;
-}
-
-.keep {
-  background-color: rgb(118, 118, 118);
-}
-
-input {
-  text-align: center;
-  font-size: larger;
-}
-</style>

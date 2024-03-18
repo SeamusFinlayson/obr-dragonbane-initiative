@@ -13,11 +13,12 @@ import {
 import InitCard from "./components/InitCard.vue";
 import SvgIcon from "./components/SvgIcon.vue";
 import { mdiCog } from "@mdi/js";
+import { setupTheme } from "./lib/theme";
 
 const configDialog = ref<HTMLDialogElement | null>(null);
 
 OBR.onReady(() => {
-  setupContextMenu();
+  setupTheme(), setupContextMenu();
   setupInitiativeList();
 });
 </script>
@@ -29,7 +30,11 @@ OBR.onReady(() => {
 
   <div class="row items-center mb-sm">
     <strong class="mr-sm"> Max. Cards: {{ maxCards }}</strong>
-    <SvgIcon class="cog-btn" :path="mdiCog" @click="configDialog?.showModal()" />
+    <SvgIcon
+      class="cog-btn"
+      :path="mdiCog"
+      @click="configDialog?.showModal()"
+    />
   </div>
 
   <div
@@ -72,22 +77,5 @@ OBR.onReady(() => {
 .init-title,
 .cog-btn {
   cursor: pointer;
-}
-
-.init-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-  padding: 1em;
-  border-radius: 20px;
-  background-color: inherit;
-  border: 1px solid #bb99ff;
-  box-shadow: 1px 1px 1px 1px rgb(35, 35, 35);
-}
-
-input {
-  text-align: center;
-  font-size: larger;
 }
 </style>

@@ -3,7 +3,7 @@ import { IDs, IInitCard, IInitListItem } from "../components/models";
 import { ref } from "vue";
 
 export const initiativeItems = ref(<IInitListItem[]>[]);
-export const maxCards = ref(10)
+export const maxCards = ref(10);
 
 export const setupInitiativeList = () => {
   const renderList = (items: Item[]) => {
@@ -29,8 +29,8 @@ export const setupInitiativeList = () => {
 };
 
 export const drawCards = async () => {
-  const cards: number[] = []
-  for (let i = 1; i <= maxCards.value; i++) cards.push(i)
+  const cards: number[] = [];
+  for (let i = 1; i <= maxCards.value; i++) cards.push(i);
   await OBR.scene.items.updateItems(
     (item): item is Item => (item.metadata[IDs.Meta] ? true : false),
     (items) => {
