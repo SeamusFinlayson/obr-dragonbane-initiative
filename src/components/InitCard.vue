@@ -28,7 +28,7 @@ const editDone = async (endTurn?: boolean) => {
 </script>
 
 <template>
-  <div :class="`init-card mr-sm ${card.keep ? 'keep' : ''}`" @click="editOpen">
+  <div :class="`init-card ml-sm ${card.keep ? 'keep' : ''}`" @click="editOpen">
     {{ card.card === 0 ? '' : card.card }}
   </div>
 

@@ -62,6 +62,7 @@ OBR.onReady(() => {
     <div class="card items-center justify-center">
       <div class="row mb-md"><strong>Set Max. Cards</strong></div>
       <input class="row full-width mb-md" type="number" v-model.number="maxCards" />
+      
       <button class="row full-width" @click="configDialog?.close()">DONE</button>
     </div>
   </dialog>
@@ -70,8 +71,10 @@ OBR.onReady(() => {
     <div class="card items-center justify-center">
       <div class="row mb-md"><strong>Set Label</strong></div>
       <input class="row full-width mb-md" type="text" v-model="charLabel" />
+
       <div class="row mb-md"><strong>Set Ferocity</strong></div>
       <input class="row full-width mb-md" type="number" v-model.number="charFerocity" :min="1" />
+      
       <button class="row full-width" @click="charDone()">DONE</button>
     </div>
   </dialog>

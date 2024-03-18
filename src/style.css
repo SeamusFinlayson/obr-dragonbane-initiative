@@ -197,6 +197,10 @@ input[type='checkbox']:checked::before {
   margin-right: 1em;
 }
 
+.ml-sm {
+  margin-left: 0.5em;
+}
+
 .mt-md {
   margin-top: 1em;
 }
