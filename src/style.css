@@ -59,7 +59,7 @@ body {
 dialog {
   border: 1px solid rgba(187, 153, 255, 0.3);
   border-radius: 10px;
-  background-color: var(--background);
+  background-color: var(--background-paper) !important;
   color: var(--text);
   max-width: 50%;
   cursor: default;
@@ -74,21 +74,16 @@ button {
   border: 1px solid var(--primary);
   padding: 0.6em 1.2em;
   font-size: 1em;
-  font-weight: 500;
+  font-weight: bold;
   font-family: inherit;
   color: var(--primary);
   cursor: pointer;
   transition: border-color 0.25s;
-  background-color: var(--background);
+  background-color: inherit;
   width: 100%;
 }
 button:hover {
-  background-color: var(--background-paper);
-  
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  filter: brightness(120%);
 }
 
 input[type='number'] {

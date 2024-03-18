@@ -33,7 +33,7 @@ OBR.onReady(() => {
 
 <template>
   <div class="row items-center justify-between">
-    <h2>Initiative</h2>
+    <h2>Dragonbane Initiative</h2>
   </div>
 
   <div class="row items-center mb-sm">
