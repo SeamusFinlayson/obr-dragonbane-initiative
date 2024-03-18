@@ -11,17 +11,16 @@ const props = defineProps<{
 
 const n = ref(0); // Card number
 const k = ref(false); // Keep card
-const d = ref(false); // Mark turn done
 const editCard = ref<HTMLDialogElement | null>(null);
 
 const editOpen = () => {
   n.value = props.card.card;
   k.value = props.card.keep;
-  d.value = false;
   editCard.value?.showModal();
 };
 
-const editDone = () => {
+const editDone = (endTurn?: boolean) => {
+  if (endTurn && !k.value) n.value = 0;
   if (n.value != props.card.card) setCardNumber(props.id, props.index, n.value);
   if (k.value != props.card.keep) setKeepCard(props.id, props.index, k.value);
   editCard.value?.close();
@@ -42,7 +41,9 @@ const editDone = () => {
         <input class="col" type="checkbox" v-model="k" />
       </div>
 
-      <button class="row full-width" @click="editDone">DONE</button>
+      <button class="row full-width mb-md" @click="editDone()">UPDATE</button>
+
+      <button class="row full-width" @click="editDone(true)">END TURN</button>
     </div>
   </dialog>
 </template>
