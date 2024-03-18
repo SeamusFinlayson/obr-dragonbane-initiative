@@ -34,6 +34,7 @@ const editDone = async (endTurn?: boolean) => {
 
   <dialog ref="editCard">
     <div class="card items-center justify-center">
+      <div class="row mb-md"><strong>Set Card Value</strong></div>
       <input class="row full-width mb-md" type="number" v-model.number="n" :min="0" :max="maxCards" />
 
       <div class="row mb-md full-width items-center">
