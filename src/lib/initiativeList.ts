@@ -66,15 +66,13 @@ export const drawCards = async () => {
   );
 };
 
-export const setFerocity = async (id: string) => {
-  const input = window.prompt('Set Ferocity');
-  const ferocity = input === null ? 1 : +input;
+export const setFerocity = async (id: string, value: number) =>
   await OBR.scene.items.updateItems(
     (item): item is Item => item.id === id,
     (items) => {
       for (let item of items) {
         const meta = item.metadata[IDs.Meta] as IInitListItem;
-        const cards: IInitCard[] = Array(+ferocity).fill({
+        const cards: IInitCard[] = Array(value).fill({
           card: 0,
           keep: false,
         });
@@ -83,7 +81,6 @@ export const setFerocity = async (id: string) => {
       }
     }
   );
-};
 
 export const markDone = async (id: string, index: number) =>
   await OBR.scene.items.updateItems(
