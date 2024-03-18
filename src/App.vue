@@ -16,15 +16,22 @@ const charDialog = ref<HTMLDialogElement | null>(null);
 const charFerocity = ref(1);
 const charLabel = ref('');
 const charID = ref('');
+const charItem = ref<IInitListItem>({
+  id: 'placeholder',
+  name: 'placeholder',
+  label: 'placeholder',
+  initiative: []
+})
 const charOpen = (item: IInitListItem) => {
   charFerocity.value = item.initiative.length;
   charLabel.value = item.label;
   charID.value = item.id;
+  charItem.value = JSON.parse(JSON.stringify(item)); // Javascript passes by reference so we want decoupled copy here
   charDialog.value?.showModal();
 };
 const charDone = async () => {
-  await setLabel(charID.value, charLabel.value);
-  await setFerocity(charID.value, charFerocity.value);
+  if (charLabel.value !== charItem.value.label) await setLabel(charID.value, charLabel.value);
+  if (charFerocity.value !== charItem.value.initiative.length) await setFerocity(charID.value, charFerocity.value);
   charDialog.value?.close();
 };
 
@@ -62,7 +69,7 @@ OBR.onReady(() => {
     <div class="card items-center justify-center">
       <div class="row mb-md"><strong>Set Max. Cards</strong></div>
       <input class="row full-width mb-md" type="number" v-model.number="maxCards" />
-      
+
       <button class="row full-width" @click="configDialog?.close()">DONE</button>
     </div>
   </dialog>
@@ -74,7 +81,7 @@ OBR.onReady(() => {
 
       <div class="row mb-md"><strong>Set Ferocity</strong></div>
       <input class="row full-width mb-md" type="number" v-model.number="charFerocity" :min="1" />
-      
+
       <button class="row full-width" @click="charDone()">DONE</button>
     </div>
   </dialog>
