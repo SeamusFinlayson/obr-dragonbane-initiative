@@ -63,6 +63,7 @@ dialog {
   color: var(--text);
   max-width: 50%;
   cursor: default;
+  align-items: center;
 }
 
 button {
@@ -220,6 +221,8 @@ input[type='checkbox']:checked::before {
 
 .card {
   padding: 1em;
+  display: flex;
+  flex-direction: column;
 }
 
 svg {
