@@ -20,7 +20,11 @@ export const setupInitiativeList = () => {
       }
     }
 
-    initiativeItems.value.sort((a, b) => a.initiative[0].card - b.initiative[0].card);
+    initiativeItems.value.sort(
+      (a, b) =>
+        a.initiative.reduce((acc, cur) => (acc.card < cur.card ? acc : cur)).card -
+        b.initiative.reduce((acc, cur) => (acc.card < cur.card ? acc : cur)).card
+    );
   };
 
   OBR.scene.items.onChange(renderList);

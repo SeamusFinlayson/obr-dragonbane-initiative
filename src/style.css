@@ -22,7 +22,7 @@
 
   color-scheme: light dark;
   color: var(--text);
-  background-color: var(--background);
+  background-color: var(--background-paper);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -79,11 +79,12 @@ button {
   color: var(--primary);
   cursor: pointer;
   transition: border-color 0.25s;
-  background-color: inherit;
+  background-color: var(--background);
   width: 100%;
 }
 button:hover {
   background-color: var(--background-paper);
+  
 }
 button:focus,
 button:focus-visible {
