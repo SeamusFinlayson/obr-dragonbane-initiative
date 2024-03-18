@@ -17,5 +17,6 @@ export interface IInitCard {
 export interface IInitListItem {
   id: string;
   name: string,
+  label: string,
   initiative: IInitCard[];
 }

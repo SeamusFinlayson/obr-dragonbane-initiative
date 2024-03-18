@@ -19,10 +19,10 @@ const editOpen = () => {
   editCard.value?.showModal();
 };
 
-const editDone = (endTurn?: boolean) => {
+const editDone = async (endTurn?: boolean) => {
   if (endTurn && !k.value) n.value = 0;
-  if (n.value != props.card.card) setCardNumber(props.id, props.index, n.value);
-  if (k.value != props.card.keep) setKeepCard(props.id, props.index, k.value);
+  if (n.value != props.card.card) await setCardNumber(props.id, props.index, n.value);
+  if (k.value != props.card.keep) await setKeepCard(props.id, props.index, k.value);
   editCard.value?.close();
 };
 </script>

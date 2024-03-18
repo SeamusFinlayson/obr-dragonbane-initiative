@@ -31,6 +31,7 @@ export const setupContextMenu = () => {
         OBR.scene.items.updateItems(context.items, (items) => {
           for (let item of items) {
             item.metadata[IDs.Meta] = {
+              label: item.name,
               initiative: <IInitCard[]>[
                 {
                   card: 0,

@@ -10,11 +10,12 @@ export const setupInitiativeList = () => {
     initiativeItems.value = [];
 
     for (const item of items) {
-      const metadata = item.metadata[IDs.Meta] as any;
+      const metadata = item.metadata[IDs.Meta] as IInitListItem;
       if (metadata) {
         initiativeItems.value.push({
           id: item.id,
           name: item.name,
+          label: metadata.label,
           initiative: metadata.initiative as IInitCard[],
         });
       }
@@ -66,11 +67,23 @@ export const drawCards = async () => {
   );
 };
 
+export const setLabel = async (id: string, value: string) =>
+  await OBR.scene.items.updateItems(
+    (item): item is Item => item.id === id,
+    (items) => {
+      for (let item of items) {
+        const meta = item.metadata[IDs.Meta] as IInitListItem;
+        meta.label = value;
+      }
+    }
+  );
+
 export const setFerocity = async (id: string, value: number) =>
   await OBR.scene.items.updateItems(
     (item): item is Item => item.id === id,
     (items) => {
       for (let item of items) {
+        value = value < 1 ? 1 : value
         const meta = item.metadata[IDs.Meta] as IInitListItem;
         const cards: IInitCard[] = Array(value).fill({
           card: 0,
