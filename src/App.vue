@@ -49,8 +49,10 @@ OBR.onReady(() => {
       {{ item.label ? item.label : item.name }}
     </div>
 
-    <div class="col mr-sm init-card items-center justify-end" v-for="(card, j) in item.initiative" :key="`card-${j}`">
-      <InitCard :card="card" :id="item.id" :index="j" />
+    <div class="col">
+      <div class="row">
+        <InitCard v-for="(card, j) in item.initiative" :key="`card-${j}`" :card="card" :id="item.id" :index="j" />
+      </div>
     </div>
   </div>
 
