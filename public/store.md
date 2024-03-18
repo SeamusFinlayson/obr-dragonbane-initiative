@@ -20,8 +20,8 @@ Clicking the name of a combatant in the tracker will also allow you to set their
 
 ![The character entry dialog box](image-2.png)
 
-Clicking an individual card allows you to explicitly set its value, mark it as kept for subsequent rounds. Click UPDATE when done setting values or END TURN to mark the card blank. Note that if you have opted to keep the card it won't turn blank as its value is retained for until you unselect the 'Keep Card' checkbox.
+Clicking an individual card allows you to explicitly set its value, and mark it as kept for subsequent rounds. Click UPDATE when done setting values or END TURN to mark the card blank. Note that if you have opted to keep the card it won't turn blank as its value is retained for until you unselect the 'Keep Card' checkbox.
 
 ![The card edit dialog box](image-3.png)
 
-For help and or to raise bug reports you can contact the author in the Owlbear Rodeo discord (@tiberianpun) or use the github repository at https://github.com/nboughton/obr-db-initiative
+For help and/or to raise bug reports you can contact the author in the Owlbear Rodeo discord (@tiberianpun) or use the github repository at https://github.com/nboughton/obr-dragonbane-initiative
