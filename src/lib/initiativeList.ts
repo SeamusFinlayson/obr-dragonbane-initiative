@@ -1,6 +1,6 @@
-import OBR, { Item } from "@owlbear-rodeo/sdk";
-import { IDs, IInitCard, IInitListItem } from "../components/models";
-import { ref } from "vue";
+import OBR, { Item } from '@owlbear-rodeo/sdk';
+import { IDs, IInitCard, IInitListItem } from '../components/models';
+import { ref } from 'vue';
 
 export const initiativeItems = ref(<IInitListItem[]>[]);
 export const maxCards = ref(10);
@@ -20,9 +20,7 @@ export const setupInitiativeList = () => {
       }
     }
 
-    initiativeItems.value.sort(
-      (a, b) => a.initiative[0].card - b.initiative[0].card
-    );
+    initiativeItems.value.sort((a, b) => a.initiative[0].card - b.initiative[0].card);
   };
 
   OBR.scene.items.onChange(renderList);
@@ -50,18 +48,12 @@ export const drawCards = async () => {
         const meta = item.metadata[IDs.Meta] as IInitListItem;
         meta.initiative.forEach((_, i) => {
           if (cards.length === 0) {
-            OBR.notification.show(
-              "No more initiative cards, consider grouping some enemies.",
-              "WARNING"
-            );
+            OBR.notification.show('No more initiative cards, consider grouping some enemies.', 'WARNING');
             return;
           }
 
           if (!meta.initiative[i].keep) {
-            const c = cards.splice(
-              Math.floor(Math.random() * cards.length),
-              1
-            )[0];
+            const c = cards.splice(Math.floor(Math.random() * cards.length), 1)[0];
             meta.initiative[i].card = c;
           }
         });
@@ -71,7 +63,7 @@ export const drawCards = async () => {
 };
 
 export const setFerocity = async (id: string) => {
-  const input = window.prompt("Set Ferocity");
+  const input = window.prompt('Set Ferocity');
   const ferocity = input === null ? 1 : +input;
   await OBR.scene.items.updateItems(
     (item): item is Item => item.id === id,

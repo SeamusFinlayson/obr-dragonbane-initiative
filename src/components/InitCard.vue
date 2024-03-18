@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { IInitCard } from "./models";
-import { maxCards, setCardNumber, setKeepCard } from "../lib/initiativeList";
+import { ref } from 'vue';
+import { IInitCard } from './models';
+import { maxCards, setCardNumber, setKeepCard } from '../lib/initiativeList';
 
 const props = defineProps<{
   card: IInitCard;
@@ -30,22 +30,16 @@ const editDone = () => {
 
 <template>
   <div :class="`init-card ${card.keep ? 'keep' : ''}`" @click="editOpen">
-    {{ card.card === 0 ? "" : card.card }}
+    {{ card.card === 0 ? '' : card.card }}
   </div>
 
   <dialog ref="editCard">
     <div class="card items-center justify-center">
-      <input
-        class="row full-width mb-md"
-        type="number"
-        v-model.number="n"
-        :min="0"
-        :max="maxCards"
-      />
+      <input class="row full-width mb-md" type="number" v-model.number="n" :min="0" :max="maxCards" />
 
       <div class="row mb-md full-width items-center">
-        <span class="col mr-sm">Keep Card</span
-        ><input class="col" type="checkbox" v-model="k" />
+        <span class="col mr-sm">Keep Card</span>
+        <input class="col" type="checkbox" v-model="k" />
       </div>
 
       <button class="row full-width" @click="editDone">DONE</button>

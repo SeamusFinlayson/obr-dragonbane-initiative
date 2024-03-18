@@ -1,5 +1,5 @@
-import OBR from "@owlbear-rodeo/sdk";
-import { IDs, IInitCard, Site } from "../components/models";
+import OBR from '@owlbear-rodeo/sdk';
+import { IDs, IInitCard, Site } from '../components/models';
 
 export const setupContextMenu = () => {
   OBR.contextMenu.create({
@@ -7,28 +7,26 @@ export const setupContextMenu = () => {
     icons: [
       {
         icon: `${Site.Path}/add.svg`,
-        label: "Add to Initiative",
+        label: 'Add to Initiative',
         filter: {
           every: [
-            { key: "layer", value: "CHARACTER" },
-            { key: ["metadata", IDs.Meta], value: undefined },
+            { key: 'layer', value: 'CHARACTER' },
+            { key: ['metadata', IDs.Meta], value: undefined },
           ],
         },
       },
 
       {
         icon: `${Site.Path}/remove.svg`,
-        label: "Remove from Initiative",
+        label: 'Remove from Initiative',
         filter: {
-          every: [{ key: "layer", value: "CHARACTER" }],
+          every: [{ key: 'layer', value: 'CHARACTER' }],
         },
       },
     ],
 
     onClick(context) {
-      const addToInit = context.items.every(
-        (item) => item.metadata[IDs.Meta] === undefined
-      );
+      const addToInit = context.items.every((item) => item.metadata[IDs.Meta] === undefined);
       if (addToInit) {
         OBR.scene.items.updateItems(context.items, (items) => {
           for (let item of items) {

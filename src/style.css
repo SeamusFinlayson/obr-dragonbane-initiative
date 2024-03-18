@@ -90,7 +90,7 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-input[type="number"] {
+input[type='number'] {
   background-color: inherit;
   color: inherit;
   border: 1px solid var(--primary);
@@ -103,7 +103,7 @@ input[type="number"] {
   padding-bottom: 0.3em;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   appearance: none;
   background-color: inherit;
   color: var(--primary);
@@ -121,8 +121,8 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
-input[type="checkbox"]::before {
-  content: "";
+input[type='checkbox']::before {
+  content: '';
   width: 0.65em;
   height: 0.65em;
   transform: scale(0);
@@ -131,7 +131,7 @@ input[type="checkbox"]::before {
   clip-path: circle();
 }
 
-input[type="checkbox"]:checked::before {
+input[type='checkbox']:checked::before {
   transform: scale(1);
 }
 
