@@ -38,8 +38,8 @@ export const setupContextMenu = () => {
                   keep: false,
                 },
               ],
-              hp: { max: 0, cur: 0},
-              wp: { max: 0, cur: 0}
+              hp: { max: 0, cur: 0 },
+              wp: { max: 0, cur: 0 },
             };
           }
         });

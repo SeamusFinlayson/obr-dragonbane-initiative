@@ -222,6 +222,7 @@ input[type='checkbox']:checked::before {
 .mt-sm {
   margin-top: 0.5em;
 }
+
 .mt-md {
   margin-top: 1em;
 }

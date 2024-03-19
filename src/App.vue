@@ -56,10 +56,10 @@ const charDone = async () => {
   if (charLabel.value !== charItem.value.name) await setLabel(charItem.value.id, charLabel.value);
 
   if (charFerocity.value !== charItem.value.initiative.length) await setFerocity(charItem.value.id, charFerocity.value);
-  
+
   if (charHP.value.max !== charItem.value.hp.max || charHP.value.cur !== charItem.value.hp.cur)
     await setHP(charItem.value.id, charHP.value);
-  
+
   if (charWP.value.max !== charItem.value.wp.max || charWP.value.cur !== charItem.value.wp.cur)
     await setWP(charItem.value.id, charWP.value);
   charDialog.value?.close();
@@ -72,10 +72,6 @@ OBR.onReady(() => {
 </script>
 
 <template>
-  <!--div class="row items-center justify-between">
-    <h2>Dragonbane Initiative</h2>
-  </div-->
-
   <div class="row items-center mb-sm">
     <strong class="mr-sm">Max. Cards: {{ maxCards }}</strong>
     <SvgIcon class="cog-btn" :path="mdiCog" @click="configDialog?.showModal()" />
