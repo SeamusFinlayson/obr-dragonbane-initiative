@@ -1,4 +1,4 @@
-import OBR, { Item } from '@owlbear-rodeo/sdk';
+import OBR, { Image, Item } from '@owlbear-rodeo/sdk';
 
 import { IDs, IInitCard, IInitListItem } from '../components/models';
 
@@ -14,10 +14,10 @@ export const setupInitiativeList = () => {
     for (const item of items) {
       const metadata = item.metadata[IDs.Meta] as IInitListItem;
       if (metadata) {
+        const i = item as Image
         initiativeItems.value.push({
-          id: item.id,
-          name: item.name,
-          label: metadata.label,
+          id: i.id,
+          name: i.text.plainText,
           initiative: metadata.initiative as IInitCard[],
         });
       }
@@ -74,8 +74,8 @@ export const setLabel = async (id: string, value: string) =>
     (item): item is Item => item.id === id,
     (items) => {
       for (let item of items) {
-        const meta = item.metadata[IDs.Meta] as IInitListItem;
-        meta.label = value;
+        const i = item as Image
+        i.text.plainText = value;
       }
     }
   );

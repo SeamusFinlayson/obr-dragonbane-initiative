@@ -24,20 +24,19 @@ let charID = '';
 let charItem = <IInitListItem>{
   id: 'placeholder',
   name: 'placeholder',
-  label: 'placeholder',
   initiative: [],
 };
 
 // Operations
 const charOpen = (item: IInitListItem) => {
   charFerocity.value = item.initiative.length;
-  charLabel.value = item.label;
+  charLabel.value = item.name;
   charID = item.id;
   charItem = JSON.parse(JSON.stringify(item)); // Javascript passes by reference so we want a decoupled copy here
   charDialog.value?.showModal();
 };
 const charDone = async () => {
-  if (charLabel.value !== charItem.label) await setLabel(charID, charLabel.value);
+  if (charLabel.value !== charItem.name) await setLabel(charID, charLabel.value);
   if (charFerocity.value !== charItem.initiative.length) await setFerocity(charID, charFerocity.value);
   charDialog.value?.close();
 };
@@ -60,7 +59,7 @@ OBR.onReady(() => {
 
   <div class="mb-sm init-row" v-for="(item, i) in initiativeItems" :key="`init-item-${i}`">
     <div class="col mr-md init-title" @click="charOpen(item)">
-      {{ item.label ? item.label : item.name }}
+      {{ item.name }}
     </div>
 
     <div class="col">
