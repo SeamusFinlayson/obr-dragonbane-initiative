@@ -63,7 +63,7 @@ dialog {
   background-color: inherit;
   backdrop-filter: blur(30px);
   color: var(--text);
-  max-width: 50%;
+  max-width: 75%;
   cursor: default;
   align-items: center;
 }
@@ -135,14 +135,27 @@ input[type='checkbox']:checked::before {
   transform: scale(1);
 }
 
+.btn-group-left {
+  border-top-right-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+  border-right: 0 !important;
+  width: 50%;
+}
+
+.btn-group-right {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  width: 50%;
+}
+
 .row {
-  display: inline-flex;
+  display: flex;
   flex-direction: row;
 }
 
 .init-row {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   width: 100%;
   padding: 0.7em;
@@ -206,6 +219,9 @@ input[type='checkbox']:checked::before {
   margin-left: 0.5em;
 }
 
+.mt-sm {
+  margin-top: 0.5em;
+}
 .mt-md {
   margin-top: 1em;
 }

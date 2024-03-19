@@ -9,13 +9,20 @@ export enum IDs {
   Meta = `${ID}/metadata`
 }
 
-export interface IInitCard {
+export interface InitCard {
   card: number;
   keep: boolean;
 }
 
-export interface IInitListItem {
+export interface StatTrack {
+  max: number;
+  cur: number;
+}
+
+export interface InitListItem {
   id: string;
   name: string,
-  initiative: IInitCard[];
+  initiative: InitCard[];
+  hp: StatTrack;
+  wp: StatTrack;
 }

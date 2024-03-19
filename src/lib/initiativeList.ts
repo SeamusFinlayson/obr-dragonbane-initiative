@@ -1,10 +1,10 @@
 import OBR, { Image, Item } from '@owlbear-rodeo/sdk';
 
-import { IDs, IInitCard, IInitListItem } from '../components/models';
+import { IDs, InitCard, InitListItem, StatTrack } from '../components/models';
 
 import { ref } from 'vue';
 
-export const initiativeItems = ref(<IInitListItem[]>[]);
+export const initiativeItems = ref(<InitListItem[]>[]);
 export const maxCards = ref(10);
 
 export const setupInitiativeList = () => {
@@ -12,13 +12,15 @@ export const setupInitiativeList = () => {
     initiativeItems.value = [];
 
     for (const item of items) {
-      const metadata = item.metadata[IDs.Meta] as IInitListItem;
+      const metadata = item.metadata[IDs.Meta] as InitListItem;
       if (metadata) {
-        const i = item as Image
+        const i = item as Image;
         initiativeItems.value.push({
           id: i.id,
           name: i.text.plainText,
-          initiative: metadata.initiative as IInitCard[],
+          initiative: metadata.initiative,
+          hp: metadata.hp,
+          wp: metadata.wp,
         });
       }
     }
@@ -41,7 +43,7 @@ export const drawCards = async () => {
     (items) => {
       // Splice out any kept cards
       for (let item of items) {
-        const meta = item.metadata[IDs.Meta] as IInitListItem;
+        const meta = item.metadata[IDs.Meta] as InitListItem;
         meta.initiative.forEach((c) => {
           if (c.keep) {
             const i = cards.findIndex((n) => n === c.card);
@@ -52,7 +54,7 @@ export const drawCards = async () => {
 
       // Draw the cards
       for (let item of items) {
-        const meta = item.metadata[IDs.Meta] as IInitListItem;
+        const meta = item.metadata[IDs.Meta] as InitListItem;
         meta.initiative.forEach((_, i) => {
           if (cards.length === 0) {
             OBR.notification.show('No more initiative cards, consider grouping some enemies.', 'WARNING');
@@ -71,11 +73,32 @@ export const drawCards = async () => {
 
 export const setLabel = async (id: string, value: string) =>
   await OBR.scene.items.updateItems(
+    (item): item is Image => item.id === id,
+    (items) => {
+      for (let item of items) {
+        item.text.plainText = value;
+      }
+    }
+  );
+
+export const setHP = async (id: string, hp: StatTrack) =>
+  await OBR.scene.items.updateItems(
     (item): item is Item => item.id === id,
     (items) => {
       for (let item of items) {
-        const i = item as Image
-        i.text.plainText = value;
+        const meta = item.metadata[IDs.Meta] as InitListItem;
+        meta.hp = { max: hp.max, cur: hp.cur };
+      }
+    }
+  );
+
+export const setWP = async (id: string, wp: StatTrack) =>
+  await OBR.scene.items.updateItems(
+    (item): item is Item => item.id === id,
+    (items) => {
+      for (let item of items) {
+        const meta = item.metadata[IDs.Meta] as InitListItem;
+        meta.wp = { max: wp.max, cur: wp.cur };
       }
     }
   );
@@ -86,8 +109,8 @@ export const setFerocity = async (id: string, value: number) =>
     (items) => {
       for (let item of items) {
         value = value < 1 ? 1 : value;
-        const meta = item.metadata[IDs.Meta] as IInitListItem;
-        const cards: IInitCard[] = Array(value).fill({
+        const meta = item.metadata[IDs.Meta] as InitListItem;
+        const cards: InitCard[] = Array(value).fill({
           card: 0,
           keep: false,
         });
@@ -102,7 +125,7 @@ export const markDone = async (id: string, index: number) =>
     (item): item is Item => item.id === id,
     (items) => {
       for (let item of items) {
-        const meta = item.metadata[IDs.Meta] as IInitListItem;
+        const meta = item.metadata[IDs.Meta] as InitListItem;
         meta.initiative[index].card = 0;
       }
     }
@@ -113,7 +136,7 @@ export const setKeepCard = async (id: string, index: number, value: boolean) =>
     (item): item is Item => item.id === id,
     (items) => {
       for (let item of items) {
-        const meta = item.metadata[IDs.Meta] as IInitListItem;
+        const meta = item.metadata[IDs.Meta] as InitListItem;
         meta.initiative[index].keep = value;
       }
     }
@@ -124,7 +147,7 @@ export const setCardNumber = async (id: string, index: number, value: number) =>
     (item): item is Item => item.id === id,
     (items) => {
       for (let item of items) {
-        const meta = item.metadata[IDs.Meta] as IInitListItem;
+        const meta = item.metadata[IDs.Meta] as InitListItem;
         meta.initiative[index].card = value;
       }
     }

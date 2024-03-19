@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-import { IInitCard } from './models';
+import { InitCard } from './models';
 
 import { maxCards, setCardNumber, setKeepCard } from '../lib/initiativeList';
 
 const props = defineProps<{
-  card: IInitCard;
+  card: InitCard;
   id: string;
   index: number;
 }>();

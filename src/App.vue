@@ -4,43 +4,69 @@ import SvgIcon from './components/SvgIcon.vue';
 
 import { ref } from 'vue';
 
-import { IInitListItem } from './components/models';
+import { InitListItem as InitListItem, StatTrack } from './components/models';
 
 import OBR from '@owlbear-rodeo/sdk';
-import { mdiCog } from '@mdi/js';
+import { mdiCog, mdiHead, mdiHeart } from '@mdi/js';
 
 import { setupTheme } from './lib/theme';
 import { setupContextMenu } from './lib/contextMenu';
-import { initiativeItems, setupInitiativeList, maxCards, drawCards, setFerocity, setLabel } from './lib/initiativeList';
+import {
+  initiativeItems,
+  setupInitiativeList,
+  maxCards,
+  drawCards,
+  setFerocity,
+  setLabel,
+  setHP,
+  setWP,
+} from './lib/initiativeList';
+import { role, setupRoleView } from './lib/roleView';
+import { deepCopy } from './lib/util';
 
 // Template refs
 const configDialog = ref<HTMLDialogElement | null>(null);
 const charDialog = ref<HTMLDialogElement | null>(null);
 const charFerocity = ref(1);
 const charLabel = ref('');
+const charHP = ref<StatTrack>({ cur: 0, max: 0 });
+const charWP = ref<StatTrack>({ cur: 0, max: 0 });
 
 // Control value for item edits
-let charItem = <IInitListItem>{
+const charItem = ref<InitListItem>({
   id: 'placeholder',
   name: 'placeholder',
   initiative: [],
-};
+  hp: { max: 0, cur: 0 },
+  wp: { max: 0, cur: 0 },
+});
 
 // Operations
-const charOpen = (item: IInitListItem) => {
+const charOpen = (item: InitListItem) => {
   charFerocity.value = item.initiative.length;
   charLabel.value = item.name;
-  charItem = JSON.parse(JSON.stringify(item)); // Javascript passes by reference so we want a decoupled copy here
+  // Javascript passes objects by reference so we want copies here
+  charHP.value = deepCopy(item.hp);
+  charWP.value = deepCopy(item.wp);
+  charItem.value = deepCopy(item);
+
   charDialog.value?.showModal();
 };
 const charDone = async () => {
-  if (charLabel.value !== charItem.name) await setLabel(charItem.id, charLabel.value);
-  if (charFerocity.value !== charItem.initiative.length) await setFerocity(charItem.id, charFerocity.value);
+  if (charLabel.value !== charItem.value.name) await setLabel(charItem.value.id, charLabel.value);
+
+  if (charFerocity.value !== charItem.value.initiative.length) await setFerocity(charItem.value.id, charFerocity.value);
+  
+  if (charHP.value.max !== charItem.value.hp.max || charHP.value.cur !== charItem.value.hp.cur)
+    await setHP(charItem.value.id, charHP.value);
+  
+  if (charWP.value.max !== charItem.value.wp.max || charWP.value.cur !== charItem.value.wp.cur)
+    await setWP(charItem.value.id, charWP.value);
   charDialog.value?.close();
 };
 
 OBR.onReady(() => {
-  setupTheme(), setupContextMenu();
+  setupTheme(), setupRoleView(), setupContextMenu();
   setupInitiativeList();
 });
 </script>
@@ -56,13 +82,30 @@ OBR.onReady(() => {
   </div>
 
   <div class="mb-sm init-row" v-for="(item, i) in initiativeItems" :key="`init-item-${i}`">
-    <div class="col mr-md init-title" @click="charOpen(item)">
-      {{ item.name }}
+    <div class="row justify-between">
+      <div class="col mr-md init-title" @click="charOpen(item)">
+        {{ item.name }}
+      </div>
+
+      <div class="col">
+        <div class="row">
+          <InitCard v-for="(card, j) in item.initiative" :key="`card-${j}`" :card="card" :id="item.id" :index="j" />
+        </div>
+      </div>
     </div>
 
-    <div class="col">
-      <div class="row">
-        <InitCard v-for="(card, j) in item.initiative" :key="`card-${j}`" :card="card" :id="item.id" :index="j" />
+    <div v-if="role == 'GM'" class="row items-center justify-between">
+      <div v-if="item.hp.max != 0" class="col mt-sm">
+        <div class="row">
+          <SvgIcon class="mr-sm" :path="mdiHeart" />
+          {{ item.hp.max }}/{{ item.hp.cur }}
+        </div>
+      </div>
+      <div v-if="item.wp.max != 0" class="col mt-sm">
+        <div class="row">
+          <SvgIcon class="mr-sm" :path="mdiHead" />
+          {{ item.wp.max }}/{{ item.wp.cur }}
+        </div>
       </div>
     </div>
   </div>
@@ -82,6 +125,22 @@ OBR.onReady(() => {
     <div class="card items-center justify-center">
       <div class="row mb-md"><strong>Set Label</strong></div>
       <input class="row full-width mb-md" type="text" v-model="charLabel" />
+
+      <div class="row" v-if="role == 'GM'">
+        <div class="col justify-center items-center">
+          <div class="row mb-sm"><strong>HP</strong></div>
+          <div class="row full-width mb-md">
+            <input type="number" class="col btn-group-left" placeholder="Max HP" v-model="charHP.max" />
+            <input type="number" class="col btn-group-right" placeholder="Cur. HP" v-model="charHP.cur" />
+          </div>
+
+          <div class="row mb-sm"><strong>WP</strong></div>
+          <div class="row full-width mb-md">
+            <input type="number" class="col btn-group-left" placeholder="Max WP" v-model="charWP.max" />
+            <input type="number" class="col btn-group-right" placeholder="Cur. WP" v-model="charWP.cur" />
+          </div>
+        </div>
+      </div>
 
       <div class="row mb-md"><strong>Set Ferocity</strong></div>
       <input class="row full-width mb-md" type="number" v-model.number="charFerocity" :min="1" />

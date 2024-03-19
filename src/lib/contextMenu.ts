@@ -1,4 +1,4 @@
-import { IDs, IInitCard, Site } from '../components/models';
+import { IDs, InitCard, Site } from '../components/models';
 
 import OBR from '@owlbear-rodeo/sdk';
 
@@ -32,13 +32,14 @@ export const setupContextMenu = () => {
         OBR.scene.items.updateItems(context.items, (items) => {
           for (let item of items) {
             item.metadata[IDs.Meta] = {
-              label: item.name,
-              initiative: <IInitCard[]>[
+              initiative: <InitCard[]>[
                 {
                   card: 0,
                   keep: false,
                 },
               ],
+              hp: { max: 0, cur: 0},
+              wp: { max: 0, cur: 0}
             };
           }
         });
