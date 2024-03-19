@@ -1,5 +1,7 @@
 import OBR, { Item } from '@owlbear-rodeo/sdk';
+
 import { IDs, IInitCard, IInitListItem } from '../components/models';
+
 import { ref } from 'vue';
 
 export const initiativeItems = ref(<IInitListItem[]>[]);
@@ -83,7 +85,7 @@ export const setFerocity = async (id: string, value: number) =>
     (item): item is Item => item.id === id,
     (items) => {
       for (let item of items) {
-        value = value < 1 ? 1 : value
+        value = value < 1 ? 1 : value;
         const meta = item.metadata[IDs.Meta] as IInitListItem;
         const cards: IInitCard[] = Array(value).fill({
           card: 0,

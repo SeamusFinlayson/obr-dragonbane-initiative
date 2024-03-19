@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+
 import { IInitCard } from './models';
+
 import { maxCards, setCardNumber, setKeepCard } from '../lib/initiativeList';
 
 const props = defineProps<{

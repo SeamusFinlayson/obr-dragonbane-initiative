@@ -1,37 +1,44 @@
 <script setup lang="ts">
+import InitCard from './components/InitCard.vue';
+import SvgIcon from './components/SvgIcon.vue';
+
 import { ref } from 'vue';
+
+import { IInitListItem } from './components/models';
+
 import OBR from '@owlbear-rodeo/sdk';
+import { mdiCog } from '@mdi/js';
+
+import { setupTheme } from './lib/theme';
 import { setupContextMenu } from './lib/contextMenu';
 import { initiativeItems, setupInitiativeList, maxCards, drawCards, setFerocity, setLabel } from './lib/initiativeList';
 
-import InitCard from './components/InitCard.vue';
-import SvgIcon from './components/SvgIcon.vue';
-import { mdiCog } from '@mdi/js';
-import { setupTheme } from './lib/theme';
-import { IInitListItem } from './components/models';
-
+// Template refs
 const configDialog = ref<HTMLDialogElement | null>(null);
-
 const charDialog = ref<HTMLDialogElement | null>(null);
 const charFerocity = ref(1);
 const charLabel = ref('');
-const charID = ref('');
-const charItem = ref<IInitListItem>({
+
+// Control values
+let charID = '';
+let charItem = <IInitListItem>{
   id: 'placeholder',
   name: 'placeholder',
   label: 'placeholder',
-  initiative: []
-})
+  initiative: [],
+};
+
+// Operations
 const charOpen = (item: IInitListItem) => {
   charFerocity.value = item.initiative.length;
   charLabel.value = item.label;
-  charID.value = item.id;
-  charItem.value = JSON.parse(JSON.stringify(item)); // Javascript passes by reference so we want decoupled copy here
+  charID = item.id;
+  charItem = JSON.parse(JSON.stringify(item)); // Javascript passes by reference so we want a decoupled copy here
   charDialog.value?.showModal();
 };
 const charDone = async () => {
-  if (charLabel.value !== charItem.value.label) await setLabel(charID.value, charLabel.value);
-  if (charFerocity.value !== charItem.value.initiative.length) await setFerocity(charID.value, charFerocity.value);
+  if (charLabel.value !== charItem.label) await setLabel(charID, charLabel.value);
+  if (charFerocity.value !== charItem.initiative.length) await setFerocity(charID, charFerocity.value);
   charDialog.value?.close();
 };
 

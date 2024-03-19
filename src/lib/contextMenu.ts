@@ -1,5 +1,6 @@
-import OBR from '@owlbear-rodeo/sdk';
 import { IDs, IInitCard, Site } from '../components/models';
+
+import OBR from '@owlbear-rodeo/sdk';
 
 export const setupContextMenu = () => {
   OBR.contextMenu.create({
