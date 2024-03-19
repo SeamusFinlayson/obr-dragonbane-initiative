@@ -49,9 +49,9 @@ OBR.onReady(() => {
 </script>
 
 <template>
-  <div class="row items-center justify-between">
+  <!--div class="row items-center justify-between">
     <h2>Dragonbane Initiative</h2>
-  </div>
+  </div-->
 
   <div class="row items-center mb-sm">
     <strong class="mr-sm">Max. Cards: {{ maxCards }}</strong>

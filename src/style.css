@@ -61,7 +61,7 @@ dialog {
   border: 1px solid rgba(187, 153, 255, 0.3);
   border-radius: 10px;
   background-color: inherit;
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(30px);
   color: var(--text);
   max-width: 50%;
   cursor: default;
@@ -145,7 +145,7 @@ input[type='checkbox']:checked::before {
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  padding: 1em;
+  padding: 0.7em;
   border-radius: 20px;
   background-image: inherit;
   border: 1px solid var(--primary);
