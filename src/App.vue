@@ -19,8 +19,7 @@ const charDialog = ref<HTMLDialogElement | null>(null);
 const charFerocity = ref(1);
 const charLabel = ref('');
 
-// Control values
-let charID = '';
+// Control value for item edits
 let charItem = <IInitListItem>{
   id: 'placeholder',
   name: 'placeholder',
@@ -31,13 +30,12 @@ let charItem = <IInitListItem>{
 const charOpen = (item: IInitListItem) => {
   charFerocity.value = item.initiative.length;
   charLabel.value = item.name;
-  charID = item.id;
   charItem = JSON.parse(JSON.stringify(item)); // Javascript passes by reference so we want a decoupled copy here
   charDialog.value?.showModal();
 };
 const charDone = async () => {
-  if (charLabel.value !== charItem.name) await setLabel(charID, charLabel.value);
-  if (charFerocity.value !== charItem.initiative.length) await setFerocity(charID, charFerocity.value);
+  if (charLabel.value !== charItem.name) await setLabel(charItem.id, charLabel.value);
+  if (charFerocity.value !== charItem.initiative.length) await setFerocity(charItem.id, charFerocity.value);
   charDialog.value?.close();
 };
 
