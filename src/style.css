@@ -20,9 +20,9 @@
   --text-disabled: #...;
   */
 
-  color-scheme: light dark;
   color: var(--text);
-  background-color: var(--background-paper);
+  backdrop-filter: blur(5px);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -40,6 +40,7 @@ a:hover {
 }
 
 body {
+  background-color: transparent;
   margin: 0;
   padding: 0;
 }
@@ -59,7 +60,8 @@ body {
 dialog {
   border: 1px solid rgba(187, 153, 255, 0.3);
   border-radius: 10px;
-  background-color: var(--background-paper) !important;
+  background-color: inherit;
+  backdrop-filter: blur(15px);
   color: var(--text);
   max-width: 50%;
   cursor: default;
@@ -87,7 +89,8 @@ button:hover {
   filter: brightness(120%);
 }
 
-input[type='number'], input[type='text'] {
+input[type='number'],
+input[type='text'] {
   background-color: inherit;
   color: inherit;
   border: 1px solid var(--primary);
@@ -102,13 +105,13 @@ input[type='number'], input[type='text'] {
 
 input[type='checkbox'] {
   appearance: none;
-  background-color: inherit;
+  background-image: inherit;
   color: var(--primary);
   margin: 0;
   font: inherit;
   width: 1.15em;
   height: 1.15em;
-  border: 0.15em solid var(--primary-dark);
+  border: 0.15em solid var(--primary);
   border-radius: 0.15em;
   transform: translateY(-0.075em);
   display: grid;
@@ -144,7 +147,7 @@ input[type='checkbox']:checked::before {
   width: 100%;
   padding: 1em;
   border-radius: 20px;
-  background-color: inherit;
+  background-image: inherit;
   border: 1px solid var(--primary);
 }
 
