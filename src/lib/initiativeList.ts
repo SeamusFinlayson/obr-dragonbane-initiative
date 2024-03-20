@@ -17,7 +17,7 @@ export const setupInitiativeList = () => {
         const i = item as Image;
         initiativeItems.value.push({
           id: i.id,
-          name: i.text.plainText,
+          name: i.text.plainText ? i.text.plainText : i.name,
           initiative: metadata.initiative,
           hp: metadata.hp,
           wp: metadata.wp,

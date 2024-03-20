@@ -93,13 +93,13 @@ OBR.onReady(() => {
     <div v-if="role == 'GM'" class="row items-center justify-between">
       <div v-if="item.hp.max != 0" class="col mt-sm">
         <div class="row">
-          <SvgIcon class="mr-sm" :path="mdiHeart" />
+          <SvgIcon class="mr-sm" :path="mdiHeart" :fill-pc="item.hp.cur / item.hp.max" />
           {{ item.hp.max }}/{{ item.hp.cur }}
         </div>
       </div>
       <div v-if="item.wp.max != 0" class="col mt-sm">
         <div class="row">
-          <SvgIcon class="mr-sm" :path="mdiHead" />
+          <SvgIcon class="mr-sm" :path="mdiHead" :fill-pc="item.wp.cur / item.wp.max" />
           {{ item.wp.max }}/{{ item.wp.cur }}
         </div>
       </div>
