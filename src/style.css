@@ -247,5 +247,4 @@ input[type='checkbox']:checked::before {
 
 svg {
   fill: var(--text);
-  fill-opacity: 80%;
 }

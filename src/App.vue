@@ -8,6 +8,7 @@ import { InitListItem as InitListItem, StatTrack } from './components/models';
 
 import OBR from '@owlbear-rodeo/sdk';
 import { mdiCog, mdiHead, mdiHeart } from '@mdi/js';
+import { v4 as uid } from 'uuid';
 
 import { setupTheme } from './lib/theme';
 import { setupContextMenu } from './lib/contextMenu';
@@ -77,7 +78,7 @@ OBR.onReady(() => {
     <SvgIcon class="cog-btn" :path="mdiCog" @click="configDialog?.showModal()" />
   </div>
 
-  <div class="mb-sm init-row" v-for="(item, i) in initiativeItems" :key="`init-item-${i}`">
+  <div class="mb-sm init-row" v-for="item in initiativeItems" :key="`init-${item.id}`">
     <div class="row justify-between">
       <div class="col mr-md init-title" @click="charOpen(item)">
         {{ item.name }}
@@ -85,7 +86,7 @@ OBR.onReady(() => {
 
       <div class="col">
         <div class="row">
-          <InitCard v-for="(card, j) in item.initiative" :key="`card-${j}`" :card="card" :id="item.id" :index="j" />
+          <InitCard v-for="(card, j) in item.initiative" :key="`card-${uid()}`" :card="card" :id="item.id" :index="j" />
         </div>
       </div>
     </div>
@@ -127,13 +128,25 @@ OBR.onReady(() => {
           <div class="row mb-sm"><strong>HP</strong></div>
           <div class="row full-width mb-md">
             <input type="number" class="col btn-group-left" placeholder="Max HP" v-model="charHP.max" />
-            <input type="number" class="col btn-group-right" placeholder="Cur. HP" v-model="charHP.cur" />
+            <input
+              type="number"
+              class="col btn-group-right"
+              placeholder="Cur. HP"
+              v-model="charHP.cur"
+              :max="charHP.max"
+            />
           </div>
 
           <div class="row mb-sm"><strong>WP</strong></div>
           <div class="row full-width mb-md">
             <input type="number" class="col btn-group-left" placeholder="Max WP" v-model="charWP.max" />
-            <input type="number" class="col btn-group-right" placeholder="Cur. WP" v-model="charWP.cur" />
+            <input
+              type="number"
+              class="col btn-group-right"
+              placeholder="Cur. WP"
+              v-model="charWP.cur"
+              :max="charWP.max"
+            />
           </div>
         </div>
       </div>
