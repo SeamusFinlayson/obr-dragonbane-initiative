@@ -23,7 +23,7 @@ import {
   setWP,
 } from './lib/initiativeList';
 import { role, setupRoleView } from './lib/roleView';
-import { deepCopy } from './lib/util';
+import { copyStruct } from './lib/util';
 
 // Template refs
 const configDialog = ref<HTMLDialogElement | null>(null);
@@ -47,9 +47,9 @@ const charOpen = (item: InitListItem) => {
   charFerocity.value = item.initiative.length;
   charLabel.value = item.name;
   // Javascript passes objects by reference so we want copies here
-  charHP.value = deepCopy(item.hp);
-  charWP.value = deepCopy(item.wp);
-  charItem.value = deepCopy(item);
+  charHP.value = copyStruct(item.hp);
+  charWP.value = copyStruct(item.wp);
+  charItem.value = copyStruct(item);
 
   charDialog.value?.showModal();
 };
