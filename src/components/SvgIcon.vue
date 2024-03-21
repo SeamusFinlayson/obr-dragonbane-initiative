@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { v4 as uid } from 'uuid';
+import { colours } from '../lib/theme';
 
 const props = defineProps<{
   path: string;
@@ -10,34 +11,18 @@ const props = defineProps<{
 }>();
 
 const id = ref(uid());
-const percent = ref(props.fillPc ? Math.floor(props.fillPc * 100) : 100);
-const color1 = ref('#60ba62');
-const color2 = ref('red');
+const percent = computed((): number => (props.fillPc ? Math.floor(props.fillPc * 100) : 100));
 
-const setValues = () => {
-  if (props.fillPc) {
-    percent.value = Math.floor(props.fillPc * 100);
-    color1.value = document.documentElement.style.getPropertyValue('--primary-light');
-    color2.value = document.documentElement.style.getPropertyValue('--primary-dark');
-    id.value = uid();
-  }
-};
-
-watch(
-  () => props.fillPc,
-  () => setValues()
-);
-
-onMounted(() => setValues());
+onMounted(() => (id.value = uid()));
 </script>
 
 <template>
   <svg xmlns="http://www.w3.org/2000/svg" :height="height ? height : 24" :width="width ? width : 24">
     <linearGradient v-if="fillPc" :id="`lg-${id}`" x1="0.5" y1="1" x2="0.5" y2="0">
-      <stop offset="0%" :stop-color="color1" />
-      <stop :offset="`${percent}%`" :stop-color="color1" />
-      <stop :offset="`${percent}%`" :stop-color="color2" />
-      <stop offset="100%" :stop-color="color2" />
+      <stop offset="0%" :stop-color="colours.primary.light" />
+      <stop :offset="`${percent}%`" :stop-color="colours.primary.light" />
+      <stop :offset="`${percent}%`" :stop-color="colours.primary.dark" />
+      <stop offset="100%" :stop-color="colours.primary.dark" />
     </linearGradient>
     <path v-if="fillPc" :d="path" :fill="`url(#lg-${id})`" />
     <path v-else :d="path" />
