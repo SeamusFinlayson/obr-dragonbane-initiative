@@ -32,6 +32,8 @@ export const setupInitiativeList = () => {
     );
   };
 
+  OBR.scene.items.updateItems((item): item is Item => (item.metadata[IDs.Meta] ? true : false), renderList);
+
   OBR.scene.items.onChange(renderList);
 };
 
