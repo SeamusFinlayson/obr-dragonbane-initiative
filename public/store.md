@@ -2,11 +2,11 @@
 title: Dragonbane Initiative Tracker
 description: Initiative tracker for the Dragonbane RPG
 author: tiberianpun
-image: https://nboughton.uk/apps/obr-db-initiative/image.png
-icon: https://nboughton.uk/apps/obr-db-initiative/cards.svg
+image: https://nboughton.uk/apps/obr-dragonbane-initiative/image.png
+icon: https://nboughton.uk/apps/obr-dragonbane-initiative/cards.svg
 tags:
   - combat
-manifest: https://nboughton.uk/apps/obr-db-initiative/manifest.json
+manifest: https://nboughton.uk/apps/obr-dragonbane-initiative/manifest.json
 learn-more: https://github.com/nboughton/obr-dragonbane-initiative
 ---
 
@@ -16,7 +16,7 @@ Dragonbane uses a set of cards from 1 - 10 to draw initiatve each round of comba
 
 ![A token with its context menu open and the 'Remove from Initiative entry highlighted'](https://nboughton.uk/apps/obr-dragonbane-initiative/image-1.png)
 
-Clicking the name of a combatant in the tracker will also allow you to set their ferocity, HP, WP, and provide a custom label. 
+Clicking the name of a combatant in the tracker will also allow you to set their ferocity, HP, WP, and provide a custom label.
 
 ![The character entry dialog box](https://nboughton.uk/apps/obr-dragonbane-initiative/image-2.png)
 
